@@ -1,0 +1,155 @@
+.formtittle {
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+.forgetcontent {
+  font-size: 24px;
+}
+.text {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.tittle {
+  font-size: 32px;
+  line-height: 44px;
+  color: #000000;
+  font-weight: bold;
+  padding: 0;
+}
+.line {
+  width: 100%;
+  height: 0px;
+  border-bottom: 1px solid #bfbfbf;
+  margin-bottom: 36px;
+}
+.left {
+  display: flex;
+  float: left;
+}
+.labelData {
+  display: flex;
+  align-items: center;
+}
+.inputData {
+  border: 1px solid #57a4ad;
+}
+.inputLogin {
+  background: #ffffff;
+  border: 1px solid #d7d7d7;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  height: 51px;
+}
+.username {
+  margin-bottom: 32px;
+}
+.forgetpass {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: right;
+  color: #2a8c97;
+  margin-bottom: 61px;
+}
+.formposition {
+  width: 100%;
+  margin: 23px 0px 0px 0px;
+}
+.icons {
+  margin-left: 11.37px;
+}
+.btn {
+  background: #2a8c97;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: #ffffff;
+
+  text-align: center;
+}
+.bigbtn {
+  width: 196px;
+  height: 51px;
+}
+.smallbtn {
+  height: 28px;
+  width: 172px;
+}
+.nav_btn {
+  background: #2a8c97;
+  box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  color: #ffffff;
+  width: 141px;
+  height: 28px;
+  text-align: center;
+  padding: 0;
+}
+.nav-btn {
+  margin-top: 10px;
+}
+
+.modal-footer {
+  border-top: 0 none;
+}
+.centering {
+  display: flex;
+  align-items: center;
+}
+.textstep {
+  font-family: "Nunito";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 33px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.activebtn {
+  background: #2a8c97;
+}
+.inactivebtn {
+  background: rgba(42, 140, 151, 0.65);
+}
+.first {
+  font-family: "Montserrat";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.second {
+  font-family: "Montserrat";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.25em;
+  text-align: left;
+}
+.log_btn {
+  color: #f55f44;
+  background: #ffffff;
+  border: 1px solid #2a8c97;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 124px;
+  height: 40px;
+}
+.underline_tittle {
+  border-bottom: 3px solid #2a8c97;
+  padding-bottom: 5px;
+  display: inline;
+}
+.table_header {
+  background-color: #7f7f7f !important;
+}
