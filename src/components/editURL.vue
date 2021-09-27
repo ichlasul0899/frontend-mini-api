@@ -11,12 +11,11 @@
         <b-container style="width:100%;margin-top:23px;">
           <b-row>
             <b-col sm></b-col>
-            <b-col sm style="text-align:center;"> <div
-            style=""
-            class="text formtittle underline_tittle"
-          >
-            Edit URL
-          </div></b-col>
+            <b-col sm style="text-align:center;">
+              <div style="" class="text formtittle underline_tittle">
+                Edit URL
+              </div></b-col
+            >
             <b-col sm style="text-align:right"
               ><b-icon
                 @click="close()"
@@ -70,6 +69,7 @@
                 variant="success"
                 type="submit"
                 style="  width: 180px;height: 32px;"
+                @click="Check()"
                 >Simpan</b-button
               >
             </div>
@@ -106,9 +106,12 @@ export default {
     },
   },
   methods: {
+    Check() {
+      this.$bvModal.show("modal-finish");
+      this.$bvModal.hide("modal-center");
+    },
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     },
     sendInfo(item) {
       this.selectedUser = item;

@@ -11,12 +11,11 @@
         <b-container style="width:100%;margin-top:23px;">
           <b-row>
             <b-col sm></b-col>
-            <b-col sm style="text-align:center"><div
-            style=""
-            class="text formtittle underline_tittle"
-          >
-            Tambah Data
-          </div></b-col>
+            <b-col sm style="text-align:center"
+              ><div style="" class="text formtittle underline_tittle">
+                Tambah Data
+              </div></b-col
+            >
             <b-col sm style="text-align:right"
               ><b-icon
                 @click="close()"
@@ -32,17 +31,17 @@
         <div style="text-align: center;">
           <b-form @submit="onSubmit" style="margin:5px;">
             <b-container>
-              <div v-for="(select, name,index) in data" :key="index">
+              <div v-for="(select, name, index) in data" :key="index">
                 <b-row class="" style="margin-bottom: 12px;">
                   <b-col style="" class="labelData">{{ name }}</b-col>
                   <b-col cols="9" class="">
                     <b-form-group
-                      :id="'input'+ index"
+                      :id="'input' + index"
                       label=""
                       label-for="input-1"
                     >
                       <b-form-input
-                        :id="'input'+ index"
+                        :id="'input' + index"
                         v-model="form[name]"
                         type="text"
                         placeholder=""
@@ -72,7 +71,6 @@
       </template>
     </b-modal>
   </div>
-  
 </template>
 
 <script>
@@ -96,7 +94,9 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$bvModal.hide("tambah-modal-center");
+      this.$bvModal.show("modal-finish");
+      
     },
     sendInfo(item) {
       this.selectedUser = item;

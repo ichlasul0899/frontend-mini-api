@@ -1,9 +1,10 @@
 <template>
-  <b-card
-    style="width:452px;height:530px;margin: 0 auto;margin-bottom: 10px;background: rgba(255, 255, 255, 0.9);
+  <div class="centering" style="top: 50%;left: 50%;height: 100%;">
+    <b-card
+    style="width:452px;margin:auto;background: rgba(255, 255, 255, 0.9);
 border-radius: 10px;"
     tittle="Login"
-    class="mt-5"
+    class="" 
   >
     <div class="text formtittle">Login</div>
     <div class="line"></div>
@@ -28,6 +29,7 @@ border-radius: 10px;"
         <b-form-group id="input-group-2" label="Password" label-for="input-2" style="text-align:left">
           <b-form-input
             id="input-2"
+            type='password'
             v-model="form.password"
             placeholder=""
             class="inputLogin"
@@ -36,7 +38,7 @@ border-radius: 10px;"
         </b-form-group>
         <div class="forgetpass"><div style="width:fit-content;float: right;" v-b-modal.modal-center>Lupa password?</div></div>
         <div style="width: 95%;text-align: center;">
-          <b-button class="btn" type="submit" variant="primary">Login</b-button>
+          <b-button class="btn" type="submit" variant="primary" style="width:50%;">Login</b-button>
         </div>
       </b-form>
       <b-modal id="modal-center" centered style="width:576px;height:337px" headerClass='p-2 border-bottom-0' footerClass='p-2 border-top-0'>
@@ -52,7 +54,7 @@ border-radius: 10px;"
         </template>
         <template #modal-footer="{ok}">
           <div style="width: 95%;text-align: center;">
-            <b-button class="btn" size="sm" variant="success" @click="ok()">
+            <b-button class="btn" size="sm" variant="success" @click="ok()" style="width:30%">
               OK
             </b-button>
           </div>
@@ -60,6 +62,8 @@ border-radius: 10px;"
       </b-modal>
     </div>
   </b-card>
+  </div>
+  
 </template>
 
 <script>
@@ -82,7 +86,7 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$router.push("/home");
     },
     onReset(event) {
       event.preventDefault();

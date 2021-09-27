@@ -106,7 +106,7 @@
         <b-row style="">
           <b-col>
             <p style="float:left" class="mt-3">
-              Current Page: {{ currentPage }}
+              Menampilkan Data {{ showingData }}
             </p></b-col
           >
           <b-col
@@ -127,26 +127,29 @@
         </b-row>
       </b-row>
     </b-container>
-    <editModal v-bind:data="selectedUser" />
+    <editURL v-bind:Link_URL_API="selectedUser" />
     <tambahData v-bind:data="satudetailAPI" />
     <editData v-bind:data="selectedUser" />
     <detailData v-bind:data="selectedUser" />
+    <finish />
   </div>
 </template>
 
 <script>
-import editModal from "../components/editModal.vue";
+import editURL from "../components/editURL.vue";
 import tambahData from "../components/tambahData.vue";
 import editData from "../components/editData.vue";
 import detailData from "../components/detailDataModal.vue";
+import finish from "../components/FinishModal.vue";
 import "../assets/css/style.css";
 
 export default {
   components: {
-    editModal,
+    editURL,
     tambahData,
     editData,
-    detailData
+    detailData,
+    finish,
   },
   data() {
     return {
@@ -193,17 +196,19 @@ export default {
     };
   },
   computed: {
+    showingData() {
+      var y = 1 * this.currentPage;
+      var z = y * this.perPage;
+      var x = z - (this.perPage - 1);
+      var total = this.detailAPI.length
+      var line = x + " - " + z + ' dari ' + total + ' data API';
+      return line;
+    },
     rows() {
-      return this.dataURL.length;
+      return this.detailAPI.length;
     },
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.form.URL_lama = "";
-      this.form.URL_baru = "";
-    },
     sendInfo(item) {
       this.selectedUser = item;
     },

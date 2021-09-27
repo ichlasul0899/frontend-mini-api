@@ -28,7 +28,7 @@ border-radius: 10px;"
             md="auto"
             class="textstep"
             style="padding:10px;max-width:96.7px;"
-            :style="{ 'background': color2 }"
+            :style="{ background: color2 }"
             @click="steptwoform()"
             >STEP 2</b-col
           >
@@ -37,7 +37,7 @@ border-radius: 10px;"
             md="auto"
             class="textstep"
             style="padding:10px;max-width:96.7px;"
-            :style="{ 'background': color3 }"
+            :style="{ background: color3 }"
             @click="stepthreeform()"
             >STEP 3</b-col
           >
@@ -46,7 +46,7 @@ border-radius: 10px;"
             md="auto"
             class="textstep"
             style="padding:10px;max-width:96.7px;"
-            :style="{ 'background': color4 }"
+            :style="{ background: color4 }"
             @click="stepfourform()"
             >STEP 4</b-col
           >
@@ -57,7 +57,7 @@ border-radius: 10px;"
         <b-form @submit="onSubmit">
           <!-- Form 1-->
           <div v-if="show1">
-            <b-container class='formposition'>
+            <b-container class="formposition">
               <b-row>
                 <div class="text formtittle left" style="width:100%">
                   Buat Tabel
@@ -111,7 +111,7 @@ border-radius: 10px;"
           </div>
           <!-- Form 2-->
           <div v-if="show2">
-            <b-container class='formposition'>
+            <b-container class="formposition">
               <b-row>
                 <div class="text formtittle left" style="width:100%">
                   Isi Data Kolom
@@ -270,7 +270,7 @@ border-radius: 10px;"
           </div>
           <!-- Form 3-->
           <div v-if="show3">
-            <b-container class='formposition'>
+            <b-container class="formposition">
               <b-row>
                 <div
                   class="text formtittle left"
@@ -320,7 +320,7 @@ border-radius: 10px;"
           </div>
           <!-- Form 4-->
           <div v-if="show4">
-            <b-container class='formposition'>
+            <b-container class="formposition">
               <b-row>
                 <div class="text formtittle left" style="width:100%">
                   Input URL API
@@ -332,11 +332,7 @@ border-radius: 10px;"
               >
                 <b-col style="" class="labelData">URL</b-col>
                 <b-col cols="10" class="">
-                  <b-form-group
-                    id="input-group-1"
-                    label=""
-                    label-for="input-1"
-                  >
+                  <b-form-group id="input-group-1" label="" label-for="input-1">
                     <b-form-input
                       id="input-1"
                       v-model="URL"
@@ -353,54 +349,54 @@ border-radius: 10px;"
               >
                 <b-col style="" class="labelData">Nama API</b-col>
                 <b-col cols="10" class="">
-            <b-form-group
-              id="input-group-1"
-              label=""
-              label-for="input-1"
-            >
-              <b-form-input
-                id="input-1"
-                v-model="namaAPI"
-                type="text"
-                placeholder=""
-                required
-              ></b-form-input>
-            </b-form-group>
+                  <b-form-group id="input-group-1" label="" label-for="input-1">
+                    <b-form-input
+                      id="input-1"
+                      v-model="namaAPI"
+                      type="text"
+                      placeholder=""
+                      required
+                    ></b-form-input>
+                  </b-form-group>
                 </b-col>
               </b-row>
-                            <b-row align-h="end">
+              <b-row align-h="end">
                 <b-col cols="2"
                   ><b-button @click="stepthreeform()" style="" class="nav_btn"
                     >Sebelumnya</b-button
                   ></b-col
                 >
                 <b-col cols="2"
-                  ><b-button style="" class="nav_btn">Selesai</b-button
+                  ><b-button style="" class="nav_btn" @click="buatAPI()"
+                    >Submit</b-button
                   ><!--Ganti Ke Submit--></b-col
                 >
               </b-row>
             </b-container>
-            <b-container class="nav-btn">
-
-            </b-container>
+            <b-container class="nav-btn"> </b-container>
           </div>
         </b-form>
       </div>
     </b-card>
     <b-card class="mt-3" header="Form Data Result">
-      {{ namaTabel }}
+      Nama Tabel : {{ namaTabel }} Jumlah Kolom : {{ jumlahKolom }}
       <pre class="m-0">{{ Listkolom }}</pre>
     </b-card>
+    <finish />
   </div>
+  
 </template>
 
 <script>
-// @ is an alias to /src
+
+import finish from "../components/FinishModal.vue";
 import "../assets/css/style.css";
 
 export default {
   name: "Home",
-  components: {},
+  components: {
+    finish,
+  },
 
   data() {
     return {
@@ -434,8 +430,9 @@ export default {
     },
   },
   methods: {
-    showModal() {
-      this.$refs["my-modal"].show();
+    buatAPI() {
+      this.$bvModal.show("modal-finish");
+      setTimeout(() => {  window.location.reload() }, 1500);
     },
     onSubmit(event) {
       event.preventDefault();
@@ -446,8 +443,7 @@ export default {
         this.Listkolom = [];
         this.sampleData = [];
         for (var i = 1; i <= this.jumlahKolom; i++) {
-          console.log(i);
-          console.log(this.jumlahKolom);
+
           this.Listkolom.push({
             NamaKolom: "",
             TipeKolom: "",
@@ -509,6 +505,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

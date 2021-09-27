@@ -1,8 +1,8 @@
 <template>
-  <div class="message">
-    <b-button id="show-btn" @click="showModal">Open Modal</b-button>
+  <div class="">
     <b-modal
-      ref="Finish-Modal"
+      ref="modal-finish"
+      id="modal-finish"
       hide-footer
       hide-header
       centered
@@ -40,32 +40,16 @@
       </template>
     </b-modal>
   </div>
-  <!--NOTE INI BUAT TESTING DOANG JANGAN LUPA HAPUS
-  KALO LUPA TOLONG HAPUSIN YAH. SAMA DI index.js DI FILE router TY
-  -->
 </template>
 
 <script>
 export default {
   data: function() {
     return {
-       images: {
-                sample: require('@/assets/bakcgroundbuilding.png')
-            }
     };
   },
   methods: {
-    showModal() {
-      this.$refs["my-modal"].show();
-    },
-    hideModal() {
-      this.$refs["my-modal"].hide();
-    },
-    toggleModal() {
-      // We pass the ID of the button that we want to return focus to
-      // when the modal has hidden
-      this.$refs["my-modal"].toggle("#toggle-btn");
-    },
+
   },
   computed: {
     getArray() {

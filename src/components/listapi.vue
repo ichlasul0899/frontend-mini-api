@@ -50,6 +50,7 @@
                 icon="eye"
                 variant="success"
                 aria-hidden="true"
+                @click="detail()"
               ></b-icon>
               <b-icon
                 class="icons"
@@ -72,7 +73,7 @@
         <b-row style="">
           <b-col>
             <p style="float:left" class="mt-3">
-              Current Page: {{ currentPage }}
+              Menampilkan Data {{ showingData }}
             </p></b-col
           >
           <b-col
@@ -87,23 +88,24 @@
                 pills
                 aria-controls="my-table"
                 style="margin:0px !important;"
-              ></b-pagination>
+              >
+              </b-pagination>
             </div>
           </b-col>
         </b-row>
       </b-row>
     </b-container>
-    <editModal v-bind:Link_URL_API="selectedUser" />
+    <editURL v-bind:Link_URL_API="selectedUser" />
   </div>
 </template>
 
 <script>
-import editModal from "../components/editModal.vue";
+import editURL from "../components/editURL.vue";
 import "../assets/css/style.css";
 
 export default {
   components: {
-    editModal,
+    editURL,
   },
   data() {
     return {
@@ -112,6 +114,7 @@ export default {
         URL_baru: "",
       },
       selectedUser: "",
+      selectedItemsCount: "",
       perPage: 5,
       pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
       currentPage: 1,
@@ -175,11 +178,25 @@ export default {
     };
   },
   computed: {
+    showingData() {
+      var y = 1 * this.currentPage;
+      var z = y * this.perPage;
+      var x = z - (this.perPage - 1);
+      var total = this.dataURL.length;
+      if (z > total){
+        z = total
+      }
+      var line = x + " - " + z + " dari " + total + " data API";
+      return line;
+    },
     rows() {
       return this.dataURL.length;
     },
   },
   methods: {
+    detail() {
+      this.$router.push("/detailAPI");
+    },
     onSubmit(event) {
       event.preventDefault();
       alert(JSON.stringify(this.form));

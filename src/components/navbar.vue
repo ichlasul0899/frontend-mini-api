@@ -27,9 +27,11 @@
     display: inherit;"
         >
           <b-avatar src="https://placekitten.com/300/300"></b-avatar>
-          <div style="margin-left:16px;margin-right:36px;">Hi,{{user}}!</div>
-          <b-button class="log_btn" type="submit" variant="primary"
-            >Logout</b-button
+          <div style="margin-left:16px;margin-right:36px;">Hi,{{ user }}!</div>
+          <router-link to="/login">
+            <b-button class="log_btn" type="submit" variant="primary"
+              >Logout</b-button
+            ></router-link
           >
         </b-col>
       </b-row>
@@ -38,19 +40,15 @@
 </template>
 
 <script>
-
-import '../assets/css/style.css';
+import "../assets/css/style.css";
 
 export default {
   data() {
     return {
-      user:'Admin',
+      user: "Admin",
     };
   },
 };
 </script>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

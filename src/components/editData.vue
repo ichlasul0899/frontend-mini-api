@@ -15,7 +15,7 @@
             style=""
             class="text formtittle underline_tittle"
           >
-            Edit URL
+            Edit Data
           </div></b-col>
             <b-col sm style="text-align:right"
               ><b-icon
