@@ -4,7 +4,7 @@
       style="width:956px;min-height:848px;margin:auto;margin-bottom: 10px;background: rgba(255, 255, 255, 0.9);border: 1px solid #2A8C97;
 border-radius: 10px;"
       tittle="Login"
-      class="mt-5"
+      class="mt-5 text"
     >
       <div class="text formtittle" style="margin-bottom:22px;text-align:left">
         <div style="border-bottom: 3px solid #2A8C97;display:inline">
@@ -15,38 +15,50 @@ border-radius: 10px;"
       <b-container class="" style="margin: 0;">
         <b-row class="">
           <b-col
-            class="textstep"
+            class="textstep stepbox pointer"
             cols="12"
             md="auto"
-            style="padding:10px;max-width:96.7px;"
+            style=""
             :style="{ 'background-color': color1 }"
             @click="steponeform()"
+            @mouseover="hover1 = true"
+            @mouseleave="hover1 = false"
+            :class="{ active: hover1 }"
             >STEP 1</b-col
           >
           <b-col
             cols="12"
             md="auto"
-            class="textstep"
-            style="padding:10px;max-width:96.7px;"
-            :style="{ background: color2 }"
+            class="textstep stepbox pointer"
+            style=""
+            :style="{ 'background-color': color2 }"
             @click="steptwoform()"
+            @mouseover="hover2 = true"
+            @mouseleave="hover2 = false"
+            :class="{ active: hover2 }"
             >STEP 2</b-col
           >
           <b-col
             cols="12"
             md="auto"
-            class="textstep"
-            style="padding:10px;max-width:96.7px;"
-            :style="{ background: color3 }"
+            class="textstep stepbox pointer"
+            style=""
+            :style="{ 'background-color': color3 }"
+            @mouseover="hover3 = true"
+            @mouseleave="hover3 = false"
+            :class="{ active: hover3 }"
             @click="stepthreeform()"
             >STEP 3</b-col
           >
           <b-col
             cols="12"
             md="auto"
-            class="textstep"
-            style="padding:10px;max-width:96.7px;"
-            :style="{ background: color4 }"
+            class="textstep stepbox pointer"
+            style=""
+            :style="{ 'background-color': color4 }"
+            @mouseover="hover4 = true"
+            @mouseleave="hover4 = false"
+            :class="{ active: hover4 }"
             @click="stepfourform()"
             >STEP 4</b-col
           >
@@ -59,7 +71,10 @@ border-radius: 10px;"
           <div v-if="show1">
             <b-container class="formposition">
               <b-row>
-                <div class="text formtittle left" style="width:100%">
+                <div
+                  class="text formtittle left"
+                  style="width:100%; font-weight: bold;"
+                >
                   Buat Tabel
                 </div>
               </b-row>
@@ -67,7 +82,7 @@ border-radius: 10px;"
                 class="justify-content-md-center"
                 style="margin-bottom: 12px;"
               >
-                <b-col style="" class="labelData">Nama Tabel</b-col>
+                <b-col style="" class="labelData ">Nama Tabel</b-col>
                 <b-col cols="10" class="">
                   <b-form-group id="input-group-1" label="" label-for="input-1">
                     <b-form-input
@@ -288,9 +303,9 @@ border-radius: 10px;"
                   class="justify-content-md-center"
                   style="margin-bottom: 12px;"
                 >
-                  <b-col
-                    ><label><span v-html="'Kolom ' + (index + 1)"/></label
-                  ></b-col>
+                  <b-col class="centering text"
+                    ><span v-html="'Kolom ' + (index + 1)"
+                  /></b-col>
                   <b-col cols="10">
                     <b-form-group id="input-group-1" label-for="input-1">
                       <b-form-input
@@ -378,18 +393,20 @@ border-radius: 10px;"
         </b-form>
       </div>
     </b-card>
-    <b-card class="mt-3" header="Form Data Result">
+    <b-card class="mt-3 " header="Form Data Result">
       Nama Tabel : {{ namaTabel }} Jumlah Kolom : {{ jumlahKolom }}
       <pre class="m-0">{{ Listkolom }}</pre>
     </b-card>
     <finish />
   </div>
-  
 </template>
-
+<style>
+.active {
+  background-color: #294950 !important;
+}
+</style>
 <script>
-
-import finish from "../components/FinishModal.vue";
+import finish from "./FinishModal_EditURL.vue";
 import "../assets/css/style.css";
 
 export default {
@@ -400,6 +417,10 @@ export default {
 
   data() {
     return {
+      hover1: false,
+      hover2: false,
+      hover3: false,
+      hover4: false,
       Listkolom: [],
       sampleData: [],
       namaTabel: "",
@@ -410,7 +431,7 @@ export default {
       show2: false,
       show3: false,
       show4: false,
-      color1: "#2a8c97",
+      color1: "rgba(42, 140, 151, 1)",
       color2: "#32b3c2",
       color3: "#32b3c2",
       color4: "#32b3c2",
@@ -432,7 +453,9 @@ export default {
   methods: {
     buatAPI() {
       this.$bvModal.show("modal-finish");
-      setTimeout(() => {  window.location.reload() }, 1500);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     },
     onSubmit(event) {
       event.preventDefault();
@@ -443,7 +466,6 @@ export default {
         this.Listkolom = [];
         this.sampleData = [];
         for (var i = 1; i <= this.jumlahKolom; i++) {
-
           this.Listkolom.push({
             NamaKolom: "",
             TipeKolom: "",
@@ -463,7 +485,7 @@ export default {
       this.show2 = false;
       this.show3 = false;
       this.show4 = false;
-      this.color1 = "#2a8c97";
+      this.color1 = "rgba(42, 140, 151, 1)";
       this.color2 = "#32b3c2";
       this.color3 = "#32b3c2";
       this.color4 = "#32b3c2";
@@ -474,7 +496,7 @@ export default {
       this.show3 = false;
       this.show4 = false;
       this.color1 = "#32b3c2";
-      this.color2 = "#2a8c97";
+      this.color2 = "rgba(42, 140, 151, 1)";
       this.color3 = "#32b3c2";
       this.color4 = "#32b3c2";
       this.pushArr();
@@ -486,7 +508,7 @@ export default {
       this.show4 = false;
       this.color1 = "#32b3c2";
       this.color2 = "#32b3c2";
-      this.color3 = "#2a8c97";
+      this.color3 = "rgba(42, 140, 151, 1)";
       this.color4 = "#32b3c2";
       this.pushArr();
     },
@@ -498,7 +520,7 @@ export default {
       this.color1 = "#32b3c2";
       this.color2 = "#32b3c2";
       this.color3 = "#32b3c2";
-      this.color4 = "#2a8c97";
+      this.color4 = "rgba(42, 140, 151, 1)";
       this.pushArr();
     },
   },

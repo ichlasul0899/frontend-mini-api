@@ -11,11 +11,12 @@ border-radius: 10px;"
     <div style="">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show" >
         <b-form-group
+          class="text"
           id="input-group-1"
           label="Username"
           label-for="input-1"
           description=""
-          style="text-align:left"
+          style="text-align:left;font-weight: normal;"
         >
           <b-form-input
             id="input-1"
@@ -26,8 +27,9 @@ border-radius: 10px;"
             class="inputLogin username"
           ></b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-2" label="Password" label-for="input-2" style="text-align:left">
+        <b-form-group class="text" id="input-group-2" label="Password" label-for="input-2" style="text-align:left;font-weight: normal;">
           <b-form-input
+          
             id="input-2"
             type='password'
             v-model="form.password"
@@ -36,9 +38,9 @@ border-radius: 10px;"
             required
           ></b-form-input>
         </b-form-group>
-        <div class="forgetpass"><div style="width:fit-content;float: right;" v-b-modal.modal-center>Lupa password?</div></div>
-        <div style="width: 95%;text-align: center;">
-          <b-button class="btn" type="submit" variant="primary" style="width:50%;">Login</b-button>
+        <div class="forgetpass text"><div style="width:fit-content;float: right;font-size:14px !important;font-weight: 600;" v-b-modal.modal-center>Lupa password?</div></div>
+        <div style="text-align: center;margin-bottom:24px;">
+          <b-button class="btn bigbtn text" type="submit" variant="primary" style="width:50%;border-radius:10px !important;">Login</b-button>
         </div>
       </b-form>
       <b-modal id="modal-center" centered style="width:576px;height:337px" headerClass='p-2 border-bottom-0' footerClass='p-2 border-top-0'>

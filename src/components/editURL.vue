@@ -22,6 +22,7 @@
                 icon="x-circle-fill"
                 scale="2"
                 variant="secondary"
+                class='pointer'
               ></b-icon
             ></b-col>
           </b-row>
@@ -69,7 +70,7 @@
                 variant="success"
                 type="submit"
                 style="  width: 180px;height: 32px;"
-                @click="Check()"
+                @click="Checkedit()"
                 >Simpan</b-button
               >
             </div>
@@ -80,20 +81,25 @@
         <b-icon icon="x-circle-fill" scale="2"></b-icon>
       </template>
     </b-modal>
+    <finish v-bind:Message="Message" />
   </div>
 </template>
 
 <script>
 import "../assets/css/style.css";
+import finish from "./FinishModal_EditURL.vue";
 
 export default {
-  components: {},
+  components: {
+    finish,
+  },
   props: {
     id: Number,
     Link_URL_API: String,
   },
   data() {
     return {
+      Message: "URL berhasil diubah",
       form: {
         URL_lama: "",
         URL_baru: "",
@@ -106,12 +112,11 @@ export default {
     },
   },
   methods: {
-    Check() {
-      this.$bvModal.show("modal-finish");
-      this.$bvModal.hide("modal-center");
-    },
+    Checkedit() {},
     onSubmit(event) {
       event.preventDefault();
+      this.$bvModal.show("modal-finish-URL");
+      this.$bvModal.hide("modal-center");
     },
     sendInfo(item) {
       this.selectedUser = item;

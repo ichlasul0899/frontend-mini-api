@@ -1,17 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&family=Poppins:wght@300;900&display=swap');
+
 .formtittle {
-  font-size: 32px;
+  font-size: 32px !important;
   margin-bottom: 32px;
+  margin-top: 24px;
 }
 .forgetcontent {
   font-size: 24px;
 }
 .text {
-  font-family: "Nunito";
+  font-family: 'Nunito', sans-serif;
   font-style: normal;
-  font-weight: 700;
-  line-height: 44px;
-  letter-spacing: 0em;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 27px;
   text-align: center;
+}
+.textbtn{
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
 }
 .tittle {
   font-size: 32px;
@@ -49,12 +59,6 @@
   margin-bottom: 32px;
 }
 .forgetpass {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 19px;
-  text-align: right;
   color: #2a8c97;
   margin-bottom: 61px;
 }
@@ -68,11 +72,11 @@
 .btn {
   background: #2a8c97;
   box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+  border-radius: 4px !important;
   color: #ffffff;
-
   text-align: center;
 }
+.btn:hover {background-color: #294950}
 .bigbtn {
   width: 196px;
   height: 51px;
@@ -103,14 +107,19 @@
   align-items: center;
 }
 .textstep {
-  font-family: "Nunito";
+  font-family: 'Nunito', sans-serif;
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: bold;
   line-height: 33px;
   letter-spacing: 0em;
+  color: #ffffff;
   text-align: left;
 }
+.stepbox{
+  padding:10px;max-width:104px;
+}
+.stepbox:hover{ background-color: #294950 }
 .activebtn {
   background: #2a8c97;
 }
@@ -147,26 +156,14 @@
 }
 .underline_tittle {
   border-bottom: 3px solid #2a8c97;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
   display: inline;
 }
 .table_header {
   background-color: #7f7f7f !important;
 }
-.bgdiv{
-  background-image: "url${require('../assets/bakcgroundbuilding.png')}";
-}
+.pointer {cursor: pointer;}
 html, body{
-  /* Height and width fallback for older browsers. */
-  height: 100%;
-  width: 100%;
-
-  /* Set the height to match that of the viewport. */
   height: 100vh;
-
-  /* Set the width to match that of the viewport. */
-  width: 100vw;
-
-  /* Remove any browser-default margins. */
   margin: 0;
 }

@@ -49,7 +49,7 @@
                 size="sm"
                 class="mb-2 smallbtn centering"
                 style="background: #195776;margin:0px !important; justify-content : center;margin-right:33px;"
-                v-b-modal.edit-data-modal-center
+                v-b-modal.tambah-modal-center
                 @click="hide()"
               >
                 <b-icon icon="plus" aria-hidden="true"></b-icon> Tambah Data

@@ -8,27 +8,27 @@
               style="text-align: left;margin-bottom: 0px;display:flex;float:left"
               class="text formtittle underline_tittle"
             >
-              Detail API {{ dataURL[0].nama_tabel }}
+              Detail API {{ dataEksternal.API[HasilIdAPI]['Nama Tabel']}}
             </div>
           </b-col>
           <b-col></b-col>
-          <div style="text-align: left" class="text">
-            URL API : {{ dataURL[0].Link_URL_API }}
+          <div style="text-align: left;margin-bottom:9px;margin-top:9px;font-family: 'Poppins', sans-serif;font-weight: 300 !important;" class="text">
+            URL API : {{ dataEksternal.API[HasilIdAPI]['Link URL API']}}
           </div>
         </b-row>
-        <b-row class="centering" style="padding-left: 0px;margin-bottom:18px;">
+        <b-row class="centering" style="padding-left: 0px;margin-bottom:25px;">
           <b-col>
             <b-button
               size="sm"
               class="mb-2 btn centering"
               style="margin:0px !important;height:28px;width:96px;justify-content: center;"
               v-b-modal.modal-center
-              @click="sendInfo(dataURL[0].Link_URL_API)"
+              @click="sendInfo(dataEksternal.API[HasilIdAPI]['Link URL API'])"
             >
-              <b-row>
+              <b-row >
                 <b-col
-                  class="text centering"
-                  style="font-weight:400;line-height: 16px;"
+                  class="textbtn centering"
+                  style=""
                   >Edit URL</b-col
                 >
               </b-row>
@@ -42,7 +42,7 @@
               v-model="perPage"
               :options="pageOptions"
               size="sm"
-              style="float:left;border-radius:5px;box-shadow: 2px 2px;"
+              style="float:left;border-radius:7.5px;box-shadow: 2px 2px;border: 1px solid #9E9E9E;"
             ></b-form-select
           ></b-col>
           <b-col style="float: right;display: contents;">
@@ -53,13 +53,13 @@
               v-b-modal.tambah-modal-center
             >
               <b-row>
-                <b-col cols="2">
+                <b-col cols="3" class="centering" style="">
                   <b-icon icon="plus" aria-hidden="true"></b-icon
                 ></b-col>
                 <b-col
-                  cols="10"
-                  class="text centering"
-                  style="font-weight:t:400;line-height: 16px;"
+                  cols="9"
+                  class="textbtn centering"
+                  style="font-family: 'Poppins', sans-serif;"
                   >Tambah Data</b-col
                 >
               </b-row>
@@ -69,7 +69,7 @@
         <b-row>
           <b-table
             id="my-table"
-            :items="detailAPI"
+            :items="dataEksternal.API[HasilIdAPI].Zdata"
             :per-page="perPage"
             :current-page="currentPage"
             :fields="fields"
@@ -78,7 +78,7 @@
           >
             <template #cell(Aksi)="row">
               <b-icon
-                class="icons"
+                class="icons pointer"
                 icon="eye"
                 variant="success"
                 aria-hidden="true"
@@ -86,16 +86,16 @@
                 @click="sendInfo(row.item)"
               ></b-icon>
               <b-icon
-                class="icons"
+                class="icons pointer"
                 icon="pencil-square"
                 variant="info"
                 aria-hidden="true"
                 v-b-modal.edit-data-modal-center
-                @click="sendInfo(row.item)"
+                @click="sendInfo2(row.item)"
               ></b-icon>
               <b-icon
                 @click="row.toggleDetails"
-                class="icons"
+                class="icons pointer"
                 icon="trash"
                 variant="danger"
                 aria-hidden="true"
@@ -129,9 +129,8 @@
     </b-container>
     <editURL v-bind:Link_URL_API="selectedUser" />
     <tambahData v-bind:data="satudetailAPI" />
-    <editData v-bind:data="selectedUser" />
-    <detailData v-bind:data="selectedUser" />
-    <finish />
+    <editData v-bind:data="selectedUser2" />
+    <detailData v-bind:data="selectedUser3" />
   </div>
 </template>
 
@@ -140,7 +139,7 @@ import editURL from "../components/editURL.vue";
 import tambahData from "../components/tambahData.vue";
 import editData from "../components/editData.vue";
 import detailData from "../components/detailDataModal.vue";
-import finish from "../components/FinishModal.vue";
+import dataEksternal from "../assets/data.json";
 import "../assets/css/style.css";
 
 export default {
@@ -149,17 +148,23 @@ export default {
     tambahData,
     editData,
     detailData,
-    finish,
+  },
+  props:{
+    Id : Number,
   },
   data() {
     return {
       form: {},
+      dataEksternal: dataEksternal,
+      ListData :[],
       namaAPI: "Bencana Banjir",
       selectedUser: "",
-      perPage: 5,
+      selectedUser2: "",
+      selectedUser3: "",
+      perPage: 5, 
       pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
       currentPage: 1,
-      fields: ["Id", "Provinsi", "Kode", "Nama_Kab_Kota", "Aksi"],
+      fields: ["Id", "Provinsi", "Kode", "Nama_Kab/Kota", "Aksi"],
       dataURL: [
         {
           id: 1,
@@ -195,22 +200,38 @@ export default {
       ],
     };
   },
+  created(){
+    this.IdAPI = this.$route.params.IdAPI
+  },
   computed: {
     showingData() {
       var y = 1 * this.currentPage;
       var z = y * this.perPage;
       var x = z - (this.perPage - 1);
-      var total = this.detailAPI.length
+      var total = this.dataEksternal.API[this.$route.params.Id-1].Zdata.length
       var line = x + " - " + z + ' dari ' + total + ' data API';
       return line;
     },
     rows() {
-      return this.detailAPI.length;
+      return this.dataEksternal.API[this.$route.params.Id-1].Zdata.length;
+    },
+    HasilIdAPI(){
+      return this.$route.params.Id - 1;
+    },
+    DataDetail(){
+      var ListData = this.dataEksternal.API[this.IdAPI-1];
+      return ListData;
     },
   },
   methods: {
     sendInfo(item) {
       this.selectedUser = item;
+    },
+        sendInfo2(item) {
+      this.selectedUser2 = item;
+    },
+        sendInfo3(item) {
+      this.selectedUser3 = item;
     },
   },
 };

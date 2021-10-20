@@ -1,0 +1,205 @@
+{
+  "API": [
+    {
+      "Id": 1,
+      "Link URL API": "https://coredata-dev.digitalservice.id/bpbd/od_jumah_korban_bencana_bajir_0",
+      "Nama Tabel": "Jumlah Korban Bencana Banjir_0",
+      "Zdata": [
+        {
+          "ID": 0,
+          "Provinsi": "Jawa Barat_0",
+          "Kode": "1234_0",
+          "Nama_Kab/Kota": "Bandung_0"
+        },
+        {
+          "ID": 1,
+          "Provinsi": "Jawa Barat_1",
+          "Kode": "1234_1",
+          "Nama_Kab/Kota": "Bandung_1"
+        },
+        {
+          "ID": 2,
+          "Provinsi": "Jawa Barat_2",
+          "Kode": "1234_2",
+          "Nama_Kab/Kota": "Bandung_2"
+        },
+        {
+          "ID": 3,
+          "Provinsi": "Jawa Barat_3",
+          "Kode": "1234_3",
+          "Nama_Kab/Kota": "Bandung_3"
+        },
+        {
+          "ID": 4,
+          "Provinsi": "Jawa Barat_4",
+          "Kode": "1234_4",
+          "Nama_Kab/Kota": "Bandung_4"
+        },
+        {
+          "ID": 5,
+          "Provinsi": "Jawa Barat_5",
+          "Kode": "1234_5",
+          "Nama_Kab/Kota": "Bandung_5"
+        },
+        {
+          "ID": 6,
+          "Provinsi": "Jawa Barat_6",
+          "Kode": "1234_6",
+          "Nama_Kab/Kota": "Bandung_6"
+        },
+        {
+          "ID": 7,
+          "Provinsi": "Jawa Barat_7",
+          "Kode": "1234_7",
+          "Nama_Kab/Kota": "Bandung_7"
+        },
+        {
+          "ID": 8,
+          "Provinsi": "Jawa Barat_8",
+          "Kode": "1234_8",
+          "Nama_Kab/Kota": "Bandung_8"
+        },
+        {
+          "ID": 9,
+          "Provinsi": "Jawa Barat_9",
+          "Kode": "1234_9",
+          "Nama_Kab/Kota": "Bandung_9"
+        }
+      ]
+    },
+    {
+      "Id": 2,
+      "Link URL API": "https://coredata-dev.digitalservice.id/bpbd/od_jumah_korban_bencana_bajir_1",
+      "Nama Tabel": "Jumlah Korban Bencana Banjir_1",
+      "Zdata": [
+        {
+          "ID": 0,
+          "Provinsi": "DKI Jakarta_0",
+          "Kode": "1234_0",
+          "Nama_Kab/Kota": "Jakarta_0"
+        },
+        {
+          "ID": 1,
+          "Provinsi": "DKI Jakarta_1",
+          "Kode": "1234_1",
+          "Nama_Kab/Kota": "Jakarta_1"
+        },
+        {
+          "ID": 2,
+          "Provinsi": "DKI Jakarta_2",
+          "Kode": "1234_2",
+          "Nama_Kab/Kota": "Jakarta_2"
+        },
+        {
+          "ID": 3,
+          "Provinsi": "DKI Jakarta_3",
+          "Kode": "1234_3",
+          "Nama_Kab/Kota": "Jakarta_3"
+        },
+        {
+          "ID": 4,
+          "Provinsi": "DKI Jakarta_4",
+          "Kode": "1234_4",
+          "Nama_Kab/Kota": "Jakarta_4"
+        },
+        {
+          "ID": 5,
+          "Provinsi": "DKI Jakarta_5",
+          "Kode": "1234_5",
+          "Nama_Kab/Kota": "Jakarta_5"
+        },
+        {
+          "ID": 6,
+          "Provinsi": "DKI Jakarta_6",
+          "Kode": "1234_6",
+          "Nama_Kab/Kota": "Jakarta_6"
+        },
+        {
+          "ID": 7,
+          "Provinsi": "DKI Jakarta_7",
+          "Kode": "1234_7",
+          "Nama_Kab/Kota": "Jakarta_7"
+        },
+        {
+          "ID": 8,
+          "Provinsi": "DKI Jakarta_8",
+          "Kode": "1234_8",
+          "Nama_Kab/Kota": "Jakarta_8"
+        },
+        {
+          "ID": 9,
+          "Provinsi": "DKI Jakarta_9",
+          "Kode": "1234_9",
+          "Nama_Kab/Kota": "Jakarta_9"
+        }
+      ]
+    },
+    {
+      "Id": 3,
+      "Link URL API": "https://coredata-dev.digitalservice.id/bpbd/od_jumah_korban_bencana_bajir_2",
+      "Nama Tabel": "Jumlah Korban Bencana Banjir_2",
+      "Zdata": [
+        {
+          "ID": 0,
+          "Provinsi": "Jawa Timur _0",
+          "Kode": "1234_0",
+          "Nama_Kab/Kota": "Surabaya_0"
+        },
+        {
+          "ID": 1,
+          "Provinsi": "Jawa Timur _1",
+          "Kode": "1234_1",
+          "Nama_Kab/Kota": "Surabaya_1"
+        },
+        {
+          "ID": 2,
+          "Provinsi": "Jawa Timur _2",
+          "Kode": "1234_2",
+          "Nama_Kab/Kota": "Surabaya_2"
+        },
+        {
+          "ID": 3,
+          "Provinsi": "Jawa Timur _3",
+          "Kode": "1234_3",
+          "Nama_Kab/Kota": "Surabaya_3"
+        },
+        {
+          "ID": 4,
+          "Provinsi": "Jawa Timur _4",
+          "Kode": "1234_4",
+          "Nama_Kab/Kota": "Surabaya_4"
+        },
+        {
+          "ID": 5,
+          "Provinsi": "Jawa Timur _5",
+          "Kode": "1234_5",
+          "Nama_Kab/Kota": "Surabaya_5"
+        },
+        {
+          "ID": 6,
+          "Provinsi": "Jawa Timur _6",
+          "Kode": "1234_6",
+          "Nama_Kab/Kota": "Surabaya_6"
+        },
+        {
+          "ID": 7,
+          "Provinsi": "Jawa Timur _7",
+          "Kode": "1234_7",
+          "Nama_Kab/Kota": "Surabaya_7"
+        },
+        {
+          "ID": 8,
+          "Provinsi": "Jawa Timur _8",
+          "Kode": "1234_8",
+          "Nama_Kab/Kota": "Surabaya_8"
+        },
+        {
+          "ID": 9,
+          "Provinsi": "Jawa Timur _9",
+          "Kode": "1234_9",
+          "Nama_Kab/Kota": "Surabaya_9"
+        }
+      ]
+    }
+  ]
+}

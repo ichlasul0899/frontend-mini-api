@@ -11,18 +11,18 @@
         <b-container style="width:100%;margin-top:23px;">
           <b-row>
             <b-col sm></b-col>
-            <b-col sm style="text-align:center;"><div
-            style=""
-            class="text formtittle underline_tittle"
-          >
-            Edit Data
-          </div></b-col>
+            <b-col sm style="text-align:center;"
+              ><div style="" class="text formtittle underline_tittle">
+                Edit Data
+              </div></b-col
+            >
             <b-col sm style="text-align:right"
               ><b-icon
                 @click="close()"
                 icon="x-circle-fill"
                 scale="2"
                 variant="secondary"
+                class='pointer'
               ></b-icon
             ></b-col>
           </b-row>
@@ -40,11 +40,11 @@
                     label=""
                     label-for="input-1"
                   >
-                    <div v-if="name == 'Id'">
+                    <div v-if="name == 'ID'">
                       <b-form-input
                         :id="'input' + index"
                         v-model="form[name]"
-                        type="text"
+                        type="Number"
                         :placeholder="select"
                         :key="index"
                         disabled
@@ -83,20 +83,24 @@
         <b-icon icon="x-circle-fill" scale="2"></b-icon>
       </template>
     </b-modal>
+    <finish v-bind:Message="Message" />
   </div>
 </template>
 
 <script>
-
 import "../assets/css/style.css";
+import finish from "./FinishModal_EditData.vue";
 
 export default {
-  components: {},
+  components: {
+    finish,
+  },
   props: {
     data: Object,
   },
   data() {
     return {
+      Message: "Data Berhasil Diubah",
       form: {
         URL_lama: "",
         URL_baru: "",
@@ -111,7 +115,9 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$bvModal.hide("edit-data-modal-center");
+      this.$bvModal.show("modal-finish-EditData");
+      
     },
     sendInfo(item) {
       this.selectedUser = item;

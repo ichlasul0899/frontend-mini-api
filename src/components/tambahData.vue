@@ -22,6 +22,7 @@
                 icon="x-circle-fill"
                 scale="2"
                 variant="secondary"
+                class='pointer'
               ></b-icon
             ></b-col>
           </b-row>
@@ -70,20 +71,25 @@
         <b-icon icon="x-circle-fill" scale="2"></b-icon>
       </template>
     </b-modal>
+    <finish v-bind:Message="Message" />
   </div>
 </template>
 
 <script>
 import "../assets/css/style.css";
+import finish from "./FinishModal_AddData.vue";
 
 export default {
-  components: {},
+  components: {
+    finish,
+  },
   props: {
     data: Object,
   },
   data() {
     return {
       form: {},
+      Message : "Data berhasil ditambah"
     };
   },
   computed: {
@@ -95,7 +101,7 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       this.$bvModal.hide("tambah-modal-center");
-      this.$bvModal.show("modal-finish");
+      this.$bvModal.show("modal-finish-AddData");
       
     },
     sendInfo(item) {
