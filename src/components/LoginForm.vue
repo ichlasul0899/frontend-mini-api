@@ -56,7 +56,7 @@ border-radius: 10px;"
         </template>
         <template #modal-footer="{ok}">
           <div style="width: 95%;text-align: center;">
-            <b-button class="btn" size="sm" variant="success" @click="ok()" style="width:30%">
+            <b-button class="btn text" size="sm" variant="success" @click="ok()" style="width:30%">
               OK
             </b-button>
           </div>

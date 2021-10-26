@@ -20,13 +20,14 @@
               :options="pageOptions"
               size="sm"
               style="float:left;border-radius:5px;height:26px;weight:127px;"
+              class="pointer"
             ></b-form-select
           ></b-col>
           <b-col style="float: right;display: contents;">
             <router-link to="/buatapi">
               <b-button
                 size="sm"
-                class="mb-2 centering"
+                class="mb-2 centering poppinsText"
                 style="margin:0px !important;height:28px;width:172px;"
               >
                 <b-icon icon="plus" aria-hidden="true" style="margin-right:20px"></b-icon> Buat API Baru
@@ -72,8 +73,8 @@
           </b-table>
         </b-row>
         <b-row style="">
-          <b-col>
-            <p style="float:left" class="mt-3">
+          <b-col class="poppinsText">
+            <p style="float:left;color:rgba(158, 158, 158, 1);" class="mt-3">
               Menampilkan Data {{ showingData }}
             </p></b-col
           >

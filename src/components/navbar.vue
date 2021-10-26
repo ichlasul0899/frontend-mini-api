@@ -27,9 +27,9 @@
     display: inherit;"
         >
           <b-avatar src="https://placekitten.com/300/300"></b-avatar>
-          <div style="margin-left:16px;margin-right:36px;">Hi,{{ user }}!</div>
+          <div style="margin-left:16px;margin-right:36px;" class="textbtn">Hi,{{ user }}!</div>
           <router-link to="/login">
-            <b-button class="log_btn" type="submit" style="border-radius: 10px !important;" variant="primary"
+            <b-button class="log_btn text" type="submit" style="border-radius: 10px !important;" variant="primary"
               >Logout</b-button
             ></router-link
           >

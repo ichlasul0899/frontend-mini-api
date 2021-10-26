@@ -12,7 +12,7 @@
             </div>
           </b-col>
           <b-col></b-col>
-          <div style="text-align: left;margin-bottom:9px;margin-top:9px;font-family: 'Poppins', sans-serif;font-weight: 300 !important;" class="text">
+          <div style="text-align: left;margin-bottom:9px;margin-top:9px;color: rgba(0, 0, 0, 1);" class="poppinsText">
             URL API : {{ dataEksternal.API[HasilIdAPI]['Link URL API']}}
           </div>
         </b-row>
@@ -27,7 +27,7 @@
             >
               <b-row >
                 <b-col
-                  class="textbtn centering"
+                  class="poppinsText centering"
                   style=""
                   >Edit URL</b-col
                 >
@@ -42,7 +42,8 @@
               v-model="perPage"
               :options="pageOptions"
               size="sm"
-              style="float:left;border-radius:7.5px;box-shadow: 2px 2px;border: 1px solid #9E9E9E;"
+              class="pointer"
+              style="float:left;border-radius:5px;height:26px;weight:127px;border: 1px solid #9E9E9E;"
             ></b-form-select
           ></b-col>
           <b-col style="float: right;display: contents;">
@@ -58,8 +59,8 @@
                 ></b-col>
                 <b-col
                   cols="9"
-                  class="textbtn centering"
-                  style="font-family: 'Poppins', sans-serif;"
+                  class="poppinsTextcentering"
+                  style=""
                   >Tambah Data</b-col
                 >
               </b-row>
@@ -104,8 +105,8 @@
           </b-table>
         </b-row>
         <b-row style="">
-          <b-col>
-            <p style="float:left" class="mt-3">
+          <b-col class="poppinsText"> 
+            <p style="float:left;color:rgba(158, 158, 158, 1);" class="mt-3">
               Menampilkan Data {{ showingData }}
             </p></b-col
           >
