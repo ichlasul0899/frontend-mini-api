@@ -14,7 +14,13 @@ export default {
   name: "Home",
   components: {
     navbar,
-    listapi
+    listapi,
+  },
+  created() {
+    if (localStorage.getItem("token") == null) {
+      // init variable/set default variable for item
+      this.$router.push("/login");
+    }
   },
 };
 </script>

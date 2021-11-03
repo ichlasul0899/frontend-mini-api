@@ -16,12 +16,12 @@ export default {
     navbar,
     FormBuatAPI,
   },
-
-  data() {
-    return {};
+  created() {
+    if (localStorage.getItem("token") == null) {
+      // init variable/set default variable for item
+      this.$router.push("/login");
+    }
   },
-  computed: {},
-  methods: {},
 };
 </script>
 

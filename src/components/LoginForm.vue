@@ -9,7 +9,7 @@ border-radius: 10px;"
     <div class="text formtittle">Login</div>
     <div class="line"></div>
     <div style="">
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show" >
+      <b-form @submit.prevent="handleSubmit" @reset="onReset" v-if="show" >
         <b-form-group
           class="text"
           id="input-group-1"
@@ -70,6 +70,7 @@ border-radius: 10px;"
 
 <script>
 
+import axios from 'axios';
 import '../assets/css/style.css';
 
 export default {
@@ -83,12 +84,27 @@ export default {
     };
   },
   methods: {
+    async handleSubmit(){
+      const response =  await axios.post('http://localhost:3000/auth/login', {
+        email : this.form.username,
+        password : this.form.password,
+      })
+      if (response.data.token){
+        localStorage.setItem('token', response.data.token);
+        // console.log('Success');
+        this.$router.push("/home");
+      }
+      if (!response){
+        console.log('Error');
+      }
+      // console.log(response);
+    },
     showModal() {
       this.$refs["my-modal"].show();
     },
     onSubmit(event) {
       event.preventDefault();
-      this.$router.push("/home");
+      
     },
     onReset(event) {
       event.preventDefault();

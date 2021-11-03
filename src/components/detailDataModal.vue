@@ -31,13 +31,13 @@
               <b-col
                 lg="5"
                 style="border-right: 1px solid black;height:100%"
-                class=""
+                class="detailTable"
                 >{{ name }}</b-col
               >
-              <b-col class="">{{ select }}</b-col>
+              <b-col class="detailTable">{{ select }}</b-col>
             </b-row>
           </div>
-          <b-row style="border-bottom: 1px solid black;height:76px;" class="centering">
+          <b-row style="height:76px;" class="centering">
             <b-col
               lg="5"
               style="border-right: 1px solid black;height:100%;"
@@ -69,6 +69,7 @@
       <template v-slot:modal-header-close>
         <b-icon icon="x-circle-fill" scale="2"></b-icon>
       </template>
+
     </b-modal>
   </div>
 </template>

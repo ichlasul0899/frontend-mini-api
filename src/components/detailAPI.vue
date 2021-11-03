@@ -8,12 +8,15 @@
               style="text-align: left;margin-bottom: 0px;display:flex;float:left"
               class="text formtittle underline_tittle"
             >
-              Detail API {{ dataEksternal.API[HasilIdAPI]['Nama Tabel']}}
+              Detail API {{ Data_API.title}}
             </div>
           </b-col>
           <b-col></b-col>
-          <div style="text-align: left;margin-bottom:9px;margin-top:9px;color: rgba(0, 0, 0, 1);" class="poppinsText">
-            URL API : {{ dataEksternal.API[HasilIdAPI]['Link URL API']}}
+          <div
+            style="text-align: left;margin-bottom:9px;margin-top:9px;color: rgba(0, 0, 0, 1);"
+            class="poppinsText"
+          >
+            URL API : {{ Data_API.url_link }}
           </div>
         </b-row>
         <b-row class="centering" style="padding-left: 0px;margin-bottom:25px;">
@@ -23,14 +26,10 @@
               class="mb-2 btn centering"
               style="margin:0px !important;height:28px;width:96px;justify-content: center;"
               v-b-modal.modal-center
-              @click="sendInfo(dataEksternal.API[HasilIdAPI]['Link URL API'])"
+              @click="sendInfoUrl(Data_API.url_link)"
             >
-              <b-row >
-                <b-col
-                  class="poppinsText centering"
-                  style=""
-                  >Edit URL</b-col
-                >
+              <b-row>
+                <b-col class="poppinsText centering" style="">Edit URL</b-col>
               </b-row>
             </b-button>
           </b-col>
@@ -52,15 +51,13 @@
               class="mb-2 btn centering"
               style="margin:0px !important;height:28px;width:172px;"
               v-b-modal.tambah-modal-center
+              @click="sendInfoData(DataDariAPI[0])"
             >
               <b-row>
                 <b-col cols="3" class="centering" style="">
                   <b-icon icon="plus" aria-hidden="true"></b-icon
                 ></b-col>
-                <b-col
-                  cols="9"
-                  class="poppinsTextcentering"
-                  style=""
+                <b-col cols="9" class="poppinsTextcentering" style=""
                   >Tambah Data</b-col
                 >
               </b-row>
@@ -70,7 +67,7 @@
         <b-row>
           <b-table
             id="my-table"
-            :items="dataEksternal.API[HasilIdAPI].Zdata"
+            :items="DataDariAPI"
             :per-page="perPage"
             :current-page="currentPage"
             :fields="fields"
@@ -84,7 +81,7 @@
                 variant="success"
                 aria-hidden="true"
                 v-b-modal.detail-modal-center
-                @click="sendInfo(row.item)"
+                @click="sendInfoDetail(row.item)"
               ></b-icon>
               <b-icon
                 class="icons pointer"
@@ -92,7 +89,7 @@
                 variant="info"
                 aria-hidden="true"
                 v-b-modal.edit-data-modal-center
-                @click="sendInfo2(row.item)"
+                @click="sendInfoEdit(row.item)"
               ></b-icon>
               <b-icon
                 @click="row.toggleDetails"
@@ -105,7 +102,7 @@
           </b-table>
         </b-row>
         <b-row style="">
-          <b-col class="poppinsText"> 
+          <b-col class="poppinsText">
             <p style="float:left;color:rgba(158, 158, 158, 1);" class="mt-3">
               Menampilkan Data {{ showingData }}
             </p></b-col
@@ -119,19 +116,16 @@
                 v-model="currentPage"
                 :total-rows="rows"
                 :per-page="perPage"
-                pills
-                aria-controls="my-table"
-                style="margin:0px !important;"
               ></b-pagination>
             </div>
           </b-col>
         </b-row>
       </b-row>
     </b-container>
-    <editURL v-bind:Link_URL_API="selectedUser" />
-    <tambahData v-bind:data="satudetailAPI" />
-    <editData v-bind:data="selectedUser2" />
-    <detailData v-bind:data="selectedUser3" />
+    <editURL v-bind:Link_URL_API="selectedURL" />
+    <tambahData v-bind:data="selectonedetailData" />
+    <editData v-bind:data="selectedEdit" />
+    <detailData v-bind:data="selectedDetail" />
   </div>
 </template>
 
@@ -140,7 +134,7 @@ import editURL from "../components/editURL.vue";
 import tambahData from "../components/tambahData.vue";
 import editData from "../components/editData.vue";
 import detailData from "../components/detailDataModal.vue";
-import dataEksternal from "../assets/data.json";
+import axios from "axios";
 import "../assets/css/style.css";
 
 export default {
@@ -150,89 +144,79 @@ export default {
     editData,
     detailData,
   },
-  props:{
-    Id : Number,
+  props: {
+    Id: String,
+    Data: Object,
   },
   data() {
     return {
       form: {},
-      dataEksternal: dataEksternal,
-      ListData :[],
-      namaAPI: "Bencana Banjir",
-      selectedUser: "",
-      selectedUser2: "",
-      selectedUser3: "",
-      perPage: 5, 
+      selectedEdit: {},
+      selectedDetail: {},
+      selectedURL: "",
+      selectonedetailData: {},
+      DataDariAPI: [],
+      Data_API: [],
+      perPage: 5,
       pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
       currentPage: 1,
-      fields: ["Id", "Provinsi", "Kode", "Nama_Kab/Kota", "Aksi"],
-      dataURL: [
-        {
-          id: 1,
-          Link_URL_API:
-            "https://coredata-dev.digitalservice.id/bpbd/od_jumah_korban_bencana_bajir",
-          nama_tabel: "Jumlah Korban Bencana Banjir",
-        },
-      ],
-      satudetailAPI: {
-        Provinsi: "Jawa Barat",
-        Kode: "3204",
-        Nama_Kab_Kota: "Kabupaten Bandung",
-      },
-      detailAPI: [
-        {
-          Id: 1,
-          Provinsi: "Jawa Barat",
-          Kode: "3204",
-          Nama_Kab_Kota: "Kabupaten Bandung",
-        },
-        {
-          Id: 2,
-          Provinsi: "Jawa Barat",
-          Kode: "3204",
-          Nama_Kab_Kota: "Kabupaten Bandung",
-        },
-        {
-          Id: 3,
-          Provinsi: "Jawa Barat",
-          Kode: "3204",
-          Nama_Kab_Kota: "Kabupaten Bandung",
-        },
+      fields: [
+        { key: "_id", label: "Id", sortable: true },
+        { key: "Judul", label: "Nama Kota", sortable: true },
+        { key: "Text", label: "Kode", sortable: true },
+        { key: "Par", label: "Par", sortable: true },
+        { key: "Aksi", class: "text-center" },
       ],
     };
   },
-  created(){
-    this.IdAPI = this.$route.params.IdAPI
+  async created() {
+    const response = await axios.get(
+      "http://localhost:3000/" + this.$route.params.Id
+    );
+    this.DataDariAPI = response.data.data;
+    var retrievedObject = localStorage.getItem("DataAPI");
+    this.Data_API = JSON.parse(retrievedObject)
+    console.log(this.Data_API);
+    // console.log(response2);
+    // localStorage.setItem('data', this.$route.params.Data);
+    // console.log(this.$route.params.Data);
   },
   computed: {
     showingData() {
       var y = 1 * this.currentPage;
       var z = y * this.perPage;
       var x = z - (this.perPage - 1);
-      var total = this.dataEksternal.API[this.$route.params.Id-1].Zdata.length
-      var line = x + " - " + z + ' dari ' + total + ' data API';
+      var total = this.DataDariAPI.length;
+      if (z > total) {
+        z = total;
+      }
+      var line = x + " - " + z + " dari " + total + " data API";
       return line;
     },
     rows() {
-      return this.dataEksternal.API[this.$route.params.Id-1].Zdata.length;
+      return this.DataDariAPI.length;
     },
-    HasilIdAPI(){
+    HasilIdAPI() {
       return this.$route.params.Id - 1;
     },
-    DataDetail(){
-      var ListData = this.dataEksternal.API[this.IdAPI-1];
+    DataDetail() {
+      var ListData = this.DataDariAPI;
       return ListData;
     },
   },
   methods: {
-    sendInfo(item) {
-      this.selectedUser = item;
+    sendInfoUrl(item) {
+      this.selectedURL = item;
     },
-        sendInfo2(item) {
-      this.selectedUser2 = item;
+    sendInfoEdit(item) {
+      this.selectedEdit = item;
     },
-        sendInfo3(item) {
-      this.selectedUser3 = item;
+    sendInfoDetail(item) {
+      this.selectedDetail = item;
+      this.selectonedetailData = item;
+    },
+    sendInfoData(item) {
+      this.selectonedetailData = item;
     },
   },
 };

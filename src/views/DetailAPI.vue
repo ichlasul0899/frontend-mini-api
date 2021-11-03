@@ -15,24 +15,11 @@ export default {
     navbar,
     detailAPI,
   },
-  data() {
-    return {
-
-    };
-  },
-  computed: {
-    rows() {
-      return this.dataURL.length;
-    },
-  },
-  methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    sendInfo(item) {
-      this.selectedUser = item;
-    },
+  created() {
+    if (localStorage.getItem("token") == null) {
+      // init variable/set default variable for item
+      this.$router.push("/login");
+    }
   },
 };
 </script>

@@ -30,37 +30,40 @@
                 class="mb-2 centering poppinsText"
                 style="margin:0px !important;height:28px;width:172px;"
               >
-                <b-icon icon="plus" aria-hidden="true" style="margin-right:20px"></b-icon> Buat API Baru
+                <b-icon
+                  icon="plus"
+                  aria-hidden="true"
+                  style="margin-right:20px"
+                ></b-icon>
+                Buat API Baru
               </b-button>
             </router-link>
           </b-col>
         </b-row>
         <b-row>
           <b-table
-            id="my-table"
-            :items="dataEksternal.API"
+            :items="DataDariAPI"
             :per-page="perPage"
             :current-page="currentPage"
-            :fields="header"
+            :fields="fields"
             class="testingBG"
-            thead-class="text-black testingBG"
             style="text-align: start;display: inline-table;margin-top:20px;"
           >
             <template #cell(Aksi)="row">
-                <b-icon
-                  class="icons pointer"
-                  icon="eye"
-                  variant="success"
-                  aria-hidden="true"
-                  @click="detailAPI(row.item['Id'])"
-                ></b-icon>
+              <b-icon
+                class="icons pointer"
+                icon="eye"
+                variant="success"
+                aria-hidden="true"
+                @click="detailAPI(row.item['title'],row.item)"
+              ></b-icon>
               <b-icon
                 class="icons pointer"
                 icon="pencil-square"
                 variant="info"
                 aria-hidden="true"
                 v-b-modal.modal-center
-                @click="sendInfo(row.item['Link URL API'])"
+                @click="sendInfo(row.item['url_link'])"
               ></b-icon>
               <b-icon
                 @click="row.toggleDetails"
@@ -87,7 +90,7 @@
                 v-model="currentPage"
                 :total-rows="rows"
                 :per-page="perPage"
-                pills
+                
                 aria-controls="my-table"
                 style="margin:0px !important;"
               >
@@ -98,43 +101,47 @@
       </b-row>
     </b-container>
     <editURL v-bind:Link_URL_API="selectedUser" />
-
   </div>
 </template>
 
 <script>
 import editURL from "../components/editURL.vue";
+import axios from "axios";
 
-import dataEksternal from "../assets/data.json";
 import "../assets/css/style.css";
 
 export default {
   components: {
     editURL,
-
   },
   data() {
     return {
-      dataEksternal: dataEksternal,
-      form: {
-        URL_lama: "",
-        URL_baru: "",
-      },
-      Message : "",
       selectedUser: "",
       selectedItemsCount: "",
       perPage: 5,
       pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
       currentPage: 1,
-      header: ["Link URL API", "Nama Tabel", "Aksi"],
+      fields: [
+        { key: "url_link", label: "Link URL API", sortable: true },
+        { key: "title", label: "Nama Tabel", sortable: true },
+        { key: "Aksi", class: "text-center"},
+      ],
+      DataDariAPI: [],
     };
+  },
+  async created() {
+    const response = await axios.get("http://localhost:3000/api");
+    this.DataDariAPI = response.data.data;
+    localStorage.removeItem('DataAPI');
+    // console.log(response.data);
+    // console.log(response);
   },
   computed: {
     showingData() {
       var y = 1 * this.currentPage;
       var z = y * this.perPage;
       var x = z - (this.perPage - 1);
-      var total = this.dataEksternal.API.length;
+      var total = this.DataDariAPI.length;
       if (z > total) {
         z = total;
       }
@@ -142,28 +149,27 @@ export default {
       return line;
     },
     rows() {
-      return this.dataEksternal.API.length;
+      return this.DataDariAPI.length;
     },
   },
+
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-      this.form.URL_lama = "";
-      this.form.URL_baru = "";
-    },
     sendInfo(item) {
       this.selectedUser = item;
     },
-    detailAPI(Id){
-      this.$router.push({ path: `/DetailAPI/${Id}` })
-    }
+    detailAPI(Id,data) {
+      // this.$router.push({ path: `/DetailAPI/${Id}` });
+      // this.$router.push({ path: `/DetailAPI/${Id}`, props: {Data: data} });
+      // console.log(data)
+      localStorage.setItem('DataAPI', JSON.stringify(data));
+      this.$router.push({ name: 'DetailAPI' ,params: {Id:Id, Data:data}})
+    },
   },
 };
 </script>
 
 <style>
-.testingBG thead{
-  background-color: #EEEEEE;
+.testingBG thead {
+  background-color: #eeeeee;
 }
 </style>

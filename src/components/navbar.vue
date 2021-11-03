@@ -28,11 +28,9 @@
         >
           <b-avatar src="https://placekitten.com/300/300"></b-avatar>
           <div style="margin-left:16px;margin-right:36px;" class="textbtn">Hi,{{ user }}!</div>
-          <router-link to="/login">
-            <b-button class="log_btn text" type="submit" style="border-radius: 10px !important;" variant="primary"
+            <b-button class="log_btn text" type="submit" style="border-radius: 10px !important;" variant="primary" @click="logout()"
               >Logout</b-button
-            ></router-link
-          >
+            >
         </b-col>
       </b-row>
     </b-container>
@@ -48,6 +46,12 @@ export default {
       user: "Admin",
     };
   },
+  methods: {
+    logout(){
+      localStorage.clear();
+      this.$router.push("/login");
+    }
+  }
 };
 </script>
 

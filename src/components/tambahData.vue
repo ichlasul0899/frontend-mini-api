@@ -22,7 +22,7 @@
                 icon="x-circle-fill"
                 scale="2"
                 variant="secondary"
-                class='pointer'
+                class="pointer"
               ></b-icon
             ></b-col>
           </b-row>
@@ -32,7 +32,7 @@
         <div style="text-align: center;">
           <b-form @submit="onSubmit" style="margin:5px;">
             <b-container>
-              <div v-for="(select, name, index) in data" :key="index">
+              <div v-for="(select, name, index) in DetailData" :key="index">
                 <b-row class="" style="margin-bottom: 12px;">
                   <b-col style="" class="labelData">{{ name }}</b-col>
                   <b-col cols="9" class="">
@@ -72,6 +72,7 @@
       </template>
     </b-modal>
     <finish v-bind:Message="Message" />
+    
   </div>
 </template>
 
@@ -89,12 +90,14 @@ export default {
   data() {
     return {
       form: {},
-      Message : "Data berhasil ditambah"
+      Message: "Data berhasil ditambah",
     };
   },
   computed: {
-    rows() {
-      return this.dataURL.length;
+    DetailData() {
+        var rv = {};
+        for (var i = 0; i < this.data.length; ++i) rv[i] = this.data[i];
+        return this.data;
     },
   },
   methods: {
@@ -102,7 +105,6 @@ export default {
       event.preventDefault();
       this.$bvModal.hide("tambah-modal-center");
       this.$bvModal.show("modal-finish-AddData");
-      
     },
     sendInfo(item) {
       this.selectedUser = item;
