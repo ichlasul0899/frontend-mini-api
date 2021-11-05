@@ -173,7 +173,7 @@ border-radius: 10px;"
                       >
                         <b-form-input
                           id="input-1"
-                          v-model="item.NamaKolom"
+                          v-model="item.nama_kolom"
                           type="text"
                           placeholder=""
                           required
@@ -194,15 +194,16 @@ border-radius: 10px;"
                         label=""
                         label-for="input-1"
                       >
-                        <b-form-input
-                          id="input-1"
-                          v-model="item.TipeKolom"
+                        <b-form-select
+                          id="select-1"
+                          v-model="item.tipe"
                           type="text"
+                          :options="TipeOption"
                           placeholder=""
                           required
                           class="inputData"
-                          style=""
-                        ></b-form-input>
+                          style="width:100%"
+                        ></b-form-select>
                       </b-form-group>
                     </b-col>
                   </b-row>
@@ -219,9 +220,8 @@ border-radius: 10px;"
                       >
                         <b-form-input
                           id="input-1"
-                          v-model="item.PanjangKolom"
-                          type="text"
-                          placeholder=""
+                          v-model="item.panjang"
+                          :option="TipeOption"
                           required
                           class="inputData"
                           style=""
@@ -242,7 +242,7 @@ border-radius: 10px;"
                       >
                         <b-form-input
                           id="input-1"
-                          v-model="item.DefaultKolom"
+                          v-model="item.default"
                           type="text"
                           placeholder=""
                           required
@@ -260,22 +260,7 @@ border-radius: 10px;"
                     <b-col cols="10" class="">
                       <b-form-group label="">
                         <b-form-radio-group
-                          v-model="item.selectedNull"
-                          :options="options"
-                          plain
-                        ></b-form-radio-group>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
-                  <b-row
-                    class="justify-content-md-center"
-                    style="margin-bottom: 12px;"
-                  >
-                    <b-col style="" class="labelData">Auto Increment</b-col>
-                    <b-col cols="10" class="">
-                      <b-form-group label="">
-                        <b-form-radio-group
-                          v-model="item.selectedIncrement"
+                          v-model="item.isNull"
                           :options="options"
                           plain
                         ></b-form-radio-group>
@@ -326,13 +311,13 @@ border-radius: 10px;"
                   style="margin-bottom: 12px;"
                 >
                   <b-col class="centering text"
-                    ><span v-html="'Kolom ' + (index + 1)"
+                    ><span v-html="'Kolom ' + (item)"
                   /></b-col>
                   <b-col cols="10">
                     <b-form-group id="input-group-1" label-for="input-1">
                       <b-form-input
                         id="input-1"
-                        v-model="namaTabel"
+                        v-model="form4.item"
                         type="text"
                         placeholder=""
                         required
@@ -342,6 +327,7 @@ border-radius: 10px;"
                 </b-row>
               </div>
               <b-row align-h="end">
+                {{sampleData}}
                 <b-col cols="2"
                   ><b-button @click="stepthreeform()" style="" class="nav_btn"
                     >Sebelumnya</b-button
@@ -429,16 +415,15 @@ border-radius: 10px;"
         </b-form>
       </div>
     </b-card>
-    <!--
     <b-card class="mt-3 " header="Form Data Result">
       Nama Tabel : {{ form1.namaTabel }}
       <div></div>
       Jumlah Kolom : {{ form1.jumlahKolom }}
       <div></div>
-      <pre class="m-0">Kolom : {{ form2 }}</pre>
-      <pre class="m-0">Kolom : {{ form3 }}</pre>
+      <pre class="m-0">form2 : {{ form2 }}</pre>
+      <pre class="m-0">URL : {{ form3 }}</pre>
+      <pre class="m-0">last : {{ form4 }}</pre>
     </b-card>
-    -->
     <finish />
   </div>
 </template>
@@ -448,6 +433,7 @@ border-radius: 10px;"
 }
 </style>
 <script>
+// import axios from "axios";
 import finish from "./FinishModal_EditURL.vue";
 import "../assets/css/style.css";
 
@@ -468,6 +454,7 @@ export default {
         url: "",
         namaAPI: "",
       },
+      form4:{},
       sampleData: [],
       jumlahKolom: 1,
       hover1: false,
@@ -482,6 +469,21 @@ export default {
       color2: "#32b3c2",
       color3: "#32b3c2",
       color4: "#32b3c2",
+      TipeOption: [
+        { value: "int", text: "Integer" },
+        { value: "double", text: "Double" },
+        { value: "decimal", text: "Decimal" },
+        { value: "string", text: "String" },
+        { value: "object", text: "Object" },
+        { value: "array", text: "Array" },
+        { value: "date", text: "Date" },
+        { value: "bool", text: "Bool" },
+        { value: "null", text: "Null" },
+        { value: "regex", text: "Regex" },
+        { value: "uuid", text: "Uuid" },
+        { value: "timestamp", text: "TimeStamp" },
+        { value: "mixed", text: "Mixed" },
+      ],
       options: [
         { text: "Ya", value: "Yes" },
         { text: "Tidak", value: "No" },
@@ -514,15 +516,11 @@ export default {
         this.sampleData = [];
         for (var i = 1; i <= this.form1.jumlahKolom; i++) {
           this.form2.push({
-            NamaKolom: "",
-            TipeKolom: "",
-            PanjangKolom: "",
-            DefaultKolom: "",
-            selectedNull: "Yes",
-            selectedIncrement: "Yes",
-          });
-          this.sampleData.push({
-            sampel: "",
+            nama_kolom: "",
+            tipe: "",
+            panjang: "",
+            default: "",
+            isNull: "Yes",
           });
         }
       }
@@ -540,21 +538,53 @@ export default {
     steptwoform() {
       if (!this.form1.namaTabel == "") {
         this.show1 = false;
-        this.show2 = true;
-        this.show3 = false;
-        this.show4 = false;
-        this.color1 = "#32b3c2";
-        this.color2 = "rgba(42, 140, 151, 1)";
-        this.color3 = "#32b3c2";
-        this.color4 = "#32b3c2";
-        this.pushArr();
-      }
-      else{
+            this.show2 = true;
+            this.show3 = false;
+            this.show4 = false;
+            this.color1 = "#32b3c2";
+            this.color2 = "rgba(42, 140, 151, 1)";
+            this.color3 = "#32b3c2";
+            this.color4 = "#32b3c2";
+            this.pushArr();
+        // axios
+        //   .post("http://localhost:3000/api/table", {
+        //     nama_tabel: this.form1.namaTabel,
+        //   })
+        //   .then((response) => {
+        //     console.log(response);
+        //     this.show1 = false;
+        //     this.show2 = true;
+        //     this.show3 = false;
+        //     this.show4 = false;
+        //     this.color1 = "#32b3c2";
+        //     this.color2 = "rgba(42, 140, 151, 1)";
+        //     this.color3 = "#32b3c2";
+        //     this.color4 = "#32b3c2";
+        //     this.pushArr();
+        //   })
+        //   .catch((error) => {
+        //     alert(error);
+        //   });
+      } else {
         alert("Harap Isi Terlebih Dahulu Nama Tabel");
       }
     },
     stepthreeform() {
       if (!this.form1.namaTabel == "") {
+        console.log(this.form2);
+        // axios.post("http://localhost:3000/api/schema", {
+        //   nama_tabel: this.form1.namaTabel,
+        //   data: this.form2,
+        // });
+        this.form2.map((response) => {
+          this.sampleData.push(response.nama_kolom);
+          console.log(response.nama_kolom);
+        })
+        console.log(this.sampleData);
+        // for (var i = 0; i <= this.form2.length; i++) {
+        //   console.log(this.form2)
+        // }
+        // console.log(this.sampleData);
         this.show1 = false;
         this.show2 = false;
         this.show3 = true;
@@ -563,14 +593,16 @@ export default {
         this.color2 = "#32b3c2";
         this.color3 = "rgba(42, 140, 151, 1)";
         this.color4 = "#32b3c2";
-        this.pushArr();
-      }
-            else{
+      } else {
         alert("Harap Isi Terlebih Dahulu Nama Tabel");
       }
     },
     stepfourform() {
       if (!this.form1.namaTabel == "" && !this.form3.namaAPI == "") {
+        // axios.post("http://localhost:3000/api", {
+        //   nama_tabel: this.form1.namaTabel,
+        //   url_name: this.form3.url,
+        // });
         this.show1 = false;
         this.show2 = false;
         this.show3 = false;
@@ -580,13 +612,18 @@ export default {
         this.color3 = "#32b3c2";
         this.color4 = "rgba(42, 140, 151, 1)";
         this.pushArr();
-      }
-      else if(this.form1.namaTabel == "" ){
+      } else if (this.form1.namaTabel == "") {
         alert("Harap Isi Terlebih Dahulu Nama Tabel");
-      }
-      else if(this.form3.namaAPI == ""){
+      } else if (this.form3.namaAPI == "") {
         alert("Harap Isi Terlebih Dahulu Nama API");
       }
+    },
+    submission() {
+      // var wilayah = this.form1.namaTabel;
+      // wilayah = wilayah.toLowerCase();
+      //axios.post("http://localhost:3000/" + wilayah,{
+      // Object
+      //})
     },
   },
 };

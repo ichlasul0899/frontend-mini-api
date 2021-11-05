@@ -86,18 +86,17 @@ export default {
   },
   methods: {
     async handleSubmit(){
-      const response =  await axios.post('http://localhost:3000/auth/login', {
+      axios.post('http://localhost:3000/auth/login', {
         email : this.form.username,
         password : this.form.password,
-      })
-      if (response.data.token){
+      }).then((response) => {
         localStorage.setItem('token', response.data.token);
-        // console.log('Success');
+        //console.log(response)
         this.$router.push("/home");
-      }
-      if (!response){
-        console.log('Error');
-      }
+      }).catch((error) => {
+        alert(error.response.data.message);
+        //console.log(error.response.data.message)
+      })
       // console.log(response);
     },
     showModal() {
