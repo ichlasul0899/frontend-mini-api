@@ -37,6 +37,7 @@ border-radius: 10px;"
             class="inputLogin"
             required
           ></b-form-input>
+          
         </b-form-group>
         <div class="forgetpass text"><div style="width:fit-content;float: right;font-size:14px !important;font-weight: 600;" v-b-modal.modal-center>Lupa password?</div></div>
         <div style="text-align: center;margin-bottom:24px;">
@@ -109,15 +110,9 @@ export default {
     onReset(event) {
       event.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+      this.form.username = "";
+      this.form.password = "";
+
     },
   },
 };

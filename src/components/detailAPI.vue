@@ -8,7 +8,7 @@
               style="text-align: left;margin-bottom: 0px;display:flex;float:left"
               class="text formtittle underline_tittle"
             >
-              Detail API {{ Data_API.title}}
+              Detail API {{ Data_API.title }}
             </div>
           </b-col>
           <b-col></b-col>
@@ -51,7 +51,7 @@
               class="mb-2 btn centering"
               style="margin:0px !important;height:28px;width:172px;"
               v-b-modal.tambah-modal-center
-              @click="sendInfoData(DataDariAPI[0])"
+              @click="sendInfo(DataDariAPI[0])"
             >
               <b-row>
                 <b-col cols="3" class="centering" style="">
@@ -81,7 +81,7 @@
                 variant="success"
                 aria-hidden="true"
                 v-b-modal.detail-modal-center
-                @click="sendInfoDetail(row.item)"
+                @click="sendInfo(row.item)"
               ></b-icon>
               <b-icon
                 class="icons pointer"
@@ -89,7 +89,7 @@
                 variant="info"
                 aria-hidden="true"
                 v-b-modal.edit-data-modal-center
-                @click="sendInfoEdit(row.item)"
+                @click="sendInfo(row.item)"
               ></b-icon>
               <b-icon
                 @click="row.toggleDetails"
@@ -123,9 +123,9 @@
       </b-row>
     </b-container>
     <editURL v-bind:Link_URL_API="selectedURL" />
-    <tambahData v-bind:data="selectonedetailData" />
-    <editData v-bind:data="selectedEdit" />
-    <detailData v-bind:data="selectedDetail" />
+    <tambahData v-bind:data="selected" />
+    <editData v-bind:data="selected" />
+    <detailData v-bind:data="selected" />
   </div>
 </template>
 
@@ -151,10 +151,8 @@ export default {
   data() {
     return {
       form: {},
-      selectedEdit: {},
-      selectedDetail: {},
+      selected: {},
       selectedURL: "",
-      selectonedetailData: {},
       DataDariAPI: [],
       Data_API: [],
       perPage: 5,
@@ -170,16 +168,17 @@ export default {
     };
   },
   async created() {
-    const response = await axios.get(
-      "http://localhost:3000/" + this.$route.params.Id
-    );
-    this.DataDariAPI = response.data.data;
-    var retrievedObject = localStorage.getItem("DataAPI");
-    this.Data_API = JSON.parse(retrievedObject)
-    console.log(this.Data_API);
-    // console.log(response2);
-    // localStorage.setItem('data', this.$route.params.Data);
-    // console.log(this.$route.params.Data);
+    axios
+      .get("http://localhost:3000/" + this.$route.params.Id)
+      .then((response) => {
+        this.DataDariAPI = response.data.data;
+        var retrievedObject = localStorage.getItem("DataAPI");
+        this.Data_API = JSON.parse(retrievedObject);
+        console.log(this.Data_API);
+      }).catch((error) => {
+        alert(error);
+        this.$router.push("/home");
+      })
   },
   computed: {
     showingData() {
@@ -199,12 +198,11 @@ export default {
     HasilIdAPI() {
       return this.$route.params.Id - 1;
     },
-    DataDetail() {
-      var ListData = this.DataDariAPI;
-      return ListData;
-    },
   },
   methods: {
+    sendInfo(item){
+      this.selected = item
+    },
     sendInfoUrl(item) {
       this.selectedURL = item;
     },

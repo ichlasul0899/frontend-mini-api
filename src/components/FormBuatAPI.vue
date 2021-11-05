@@ -66,7 +66,7 @@ border-radius: 10px;"
       </b-container>
       <!-- Form -->
       <div class="" style="text-align:left;">
-        <b-form @submit="onSubmit">
+        <b-form @submit="steptwoform">
           <!-- Form 1-->
           <div v-if="show1">
             <b-container class="formposition">
@@ -78,194 +78,212 @@ border-radius: 10px;"
                   Buat Tabel
                 </div>
               </b-row>
-              <b-row
-                class="justify-content-md-center"
-                style="margin-bottom: 12px;"
-              >
-                <b-col style="" class="labelData ">Nama Tabel</b-col>
-                <b-col cols="10" class="">
-                  <b-form-group id="input-group-1" label="" label-for="input-1">
-                    <b-form-input
-                      id="input-1"
-                      v-model="namaTabel"
-                      type="text"
-                      placeholder=""
-                      required
-                      class="inputData"
-                      style=""
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row
-                class="justify-content-md-center"
-                style="margin-bottom: 64px;"
-              >
-                <b-col style="" class="labelData">Jumlah Kolom</b-col>
-                <b-col cols="10" class="">
-                  <b-form-group id="input-group-2" label="" label-for="input-2">
-                    <b-form-input
-                      id="input-2"
-                      v-model="jumlahKolom"
-                      placeholder="1"
-                      type="number"
-                      class="inputData"
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row align-h="end">
-                <b-col cols="2"
-                  ><b-button @click="steptwoform()" style="" class="nav_btn"
-                    >Selanjutnya</b-button
-                  ></b-col
+              <b-form @submit.prevent="steptwoform()">
+                <b-row
+                  class="justify-content-md-center"
+                  style="margin-bottom: 12px;"
                 >
-              </b-row>
+                  <b-col style="" class="labelData" cols="2">Nama Tabel</b-col>
+                  <b-col class="">
+                    <b-form-group
+                      id="input-group-1"
+                      label=""
+                      label-for="input-1"
+                    >
+                      <b-form-input
+                        id="input-1"
+                        v-model="form1.namaTabel"
+                        type="text"
+                        placeholder=""
+                        required
+                        class="inputData"
+                        style=""
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row
+                  class="justify-content-md-center"
+                  style="margin-bottom: 64px;"
+                >
+                  <b-col style="" class="labelData" cols="2"
+                    >Jumlah Kolom</b-col
+                  >
+                  <b-col cols="" class="">
+                    <b-form-group
+                      id="input-group-2"
+                      label=""
+                      label-for="input-2"
+                    >
+                      <b-form-input
+                        id="input-2"
+                        v-model="form1.jumlahKolom"
+                        placeholder="1"
+                        type="number"
+                        class="inputData"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row align-h="end">
+                  <b-col cols="2"
+                    ><b-button
+                      @click="steptwoform()"
+                      style=""
+                      class="nav_btn"
+                      type="submit"
+                      >Selanjutnya</b-button
+                    ></b-col
+                  >
+                </b-row>
+              </b-form>
             </b-container>
           </div>
           <!-- Form 2-->
           <div v-if="show2">
             <b-container class="formposition">
-              <b-row>
-                <div class="text formtittle left" style="width:100%">
-                  Isi Data Kolom
-                </div>
-              </b-row>
-              <div
-                v-for="(item, index) in Listkolom"
-                v-bind:key="index"
-                style="margin-bottom: 64px;"
-              >
+              <b-form @submit.prevent="stepthreeform()()">
                 <b-row>
                   <div class="text formtittle left" style="width:100%">
-                    Kolom {{ index + 1 }}
+                    Isi Data Kolom
                   </div>
                 </b-row>
+                <div
+                  v-for="(item, index) in form2"
+                  v-bind:key="index"
+                  style="margin-bottom: 64px;"
+                >
+                  <b-row>
+                    <div class="text formtittle left" style="width:100%">
+                      Kolom {{ index + 1 }}
+                    </div>
+                  </b-row>
 
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Nama Kolom</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group
-                      id="input-group-1"
-                      label=""
-                      label-for="input-1"
-                    >
-                      <b-form-input
-                        id="input-1"
-                        v-model="item.NamaKolom"
-                        type="text"
-                        placeholder=""
-                        required
-                        class="inputData"
-                        style=""
-                      ></b-form-input>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Tipe</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group
-                      id="input-group-1"
-                      label=""
-                      label-for="input-1"
-                    >
-                      <b-form-input
-                        id="input-1"
-                        v-model="item.TipeKolom"
-                        type="text"
-                        placeholder=""
-                        required
-                        class="inputData"
-                        style=""
-                      ></b-form-input>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Panjang</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group
-                      id="input-group-1"
-                      label=""
-                      label-for="input-1"
-                    >
-                      <b-form-input
-                        id="input-1"
-                        v-model="item.PanjangKolom"
-                        type="text"
-                        placeholder=""
-                        required
-                        class="inputData"
-                        style=""
-                      ></b-form-input>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Default</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group
-                      id="input-group-1"
-                      label=""
-                      label-for="input-1"
-                    >
-                      <b-form-input
-                        id="input-1"
-                        v-model="item.DefaultKolom"
-                        type="text"
-                        placeholder=""
-                        required
-                        class="inputData"
-                        style=""
-                      ></b-form-input>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Null</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group label="">
-                      <b-form-radio-group
-                        v-model="item.selectedNull"
-                        :options="options"
-                        plain
-                      ></b-form-radio-group>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-                <b-row
-                  class="justify-content-md-center"
-                  style="margin-bottom: 12px;"
-                >
-                  <b-col style="" class="labelData">Auto Increment</b-col>
-                  <b-col cols="10" class="">
-                    <b-form-group label="">
-                      <b-form-radio-group
-                        v-model="item.selectedIncrement"
-                        :options="options"
-                        plain
-                      ></b-form-radio-group>
-                    </b-form-group>
-                  </b-col>
-                </b-row>
-              </div>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Nama Kolom</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group
+                        id="input-group-1"
+                        label=""
+                        label-for="input-1"
+                      >
+                        <b-form-input
+                          id="input-1"
+                          v-model="item.NamaKolom"
+                          type="text"
+                          placeholder=""
+                          required
+                          class="inputData"
+                          style=""
+                        ></b-form-input>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Tipe</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group
+                        id="input-group-1"
+                        label=""
+                        label-for="input-1"
+                      >
+                        <b-form-input
+                          id="input-1"
+                          v-model="item.TipeKolom"
+                          type="text"
+                          placeholder=""
+                          required
+                          class="inputData"
+                          style=""
+                        ></b-form-input>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Panjang</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group
+                        id="input-group-1"
+                        label=""
+                        label-for="input-1"
+                      >
+                        <b-form-input
+                          id="input-1"
+                          v-model="item.PanjangKolom"
+                          type="text"
+                          placeholder=""
+                          required
+                          class="inputData"
+                          style=""
+                        ></b-form-input>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Default</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group
+                        id="input-group-1"
+                        label=""
+                        label-for="input-1"
+                      >
+                        <b-form-input
+                          id="input-1"
+                          v-model="item.DefaultKolom"
+                          type="text"
+                          placeholder=""
+                          required
+                          class="inputData"
+                          style=""
+                        ></b-form-input>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Null</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group label="">
+                        <b-form-radio-group
+                          v-model="item.selectedNull"
+                          :options="options"
+                          plain
+                        ></b-form-radio-group>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <b-row
+                    class="justify-content-md-center"
+                    style="margin-bottom: 12px;"
+                  >
+                    <b-col style="" class="labelData">Auto Increment</b-col>
+                    <b-col cols="10" class="">
+                      <b-form-group label="">
+                        <b-form-radio-group
+                          v-model="item.selectedIncrement"
+                          :options="options"
+                          plain
+                        ></b-form-radio-group>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-form>
             </b-container>
             <!-- End Looping Kolom-->
             <b-container class="nav-btn">
@@ -276,7 +294,11 @@ border-radius: 10px;"
                   ></b-col
                 >
                 <b-col cols="2"
-                  ><b-button @click="stepthreeform()" style="" class="nav_btn"
+                  ><b-button
+                    @click="stepthreeform()"
+                    style=""
+                    class="nav_btn"
+                    type="submit"
                     >Selanjutnya</b-button
                   ></b-col
                 >
@@ -321,13 +343,13 @@ border-radius: 10px;"
               </div>
               <b-row align-h="end">
                 <b-col cols="2"
-                  ><b-button @click="steptwoform()" style="" class="nav_btn"
+                  ><b-button @click="stepthreeform()" style="" class="nav_btn"
                     >Sebelumnya</b-button
                   ></b-col
                 >
                 <b-col cols="2"
-                  ><b-button @click="stepfourform()" style="" class="nav_btn"
-                    >Selanjutnya</b-button
+                  ><b-button style="" class="nav_btn" @click="buatAPI()"
+                    >Submit</b-button
                   ></b-col
                 >
               </b-row>
@@ -336,67 +358,87 @@ border-radius: 10px;"
           <!-- Form 3-->
           <div v-if="show3">
             <b-container class="formposition">
-              <b-row>
-                <div class="text formtittle left" style="width:100%">
-                  Input URL API
-                </div>
-              </b-row>
-              <b-row
-                class="justify-content-md-center"
-                style="margin-bottom: 12px;"
-              >
-                <b-col style="" class="labelData">URL</b-col>
-                <b-col cols="10" class="">
-                  <b-form-group id="input-group-1" label="" label-for="input-1">
-                    <b-form-input
-                      id="input-1"
-                      v-model="URL"
-                      type="text"
-                      placeholder=""
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row
-                class="justify-content-md-center"
-                style="margin-bottom: 64px;"
-              >
-                <b-col style="" class="labelData">Nama API</b-col>
-                <b-col cols="10" class="">
-                  <b-form-group id="input-group-1" label="" label-for="input-1">
-                    <b-form-input
-                      id="input-1"
-                      v-model="namaAPI"
-                      type="text"
-                      placeholder=""
-                      required
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row align-h="end">
-                <b-col cols="2"
-                  ><b-button @click="stepthreeform()" style="" class="nav_btn"
-                    >Sebelumnya</b-button
-                  ></b-col
+              <b-form @submit.prevent="stepfourform()">
+                <b-row>
+                  <div class="text formtittle left" style="width:100%">
+                    Input URL API
+                  </div>
+                </b-row>
+                <b-row
+                  class="justify-content-md-center"
+                  style="margin-bottom: 12px;"
                 >
-                <b-col cols="2"
-                  ><b-button style="" class="nav_btn" @click="buatAPI()"
-                    >Submit</b-button
-                  ><!--Ganti Ke Submit--></b-col
+                  <b-col style="" class="labelData">URL</b-col>
+                  <b-col cols="10" class="">
+                    <b-form-group
+                      id="input-group-3-1"
+                      label=""
+                      label-for="input-3-1"
+                    >
+                      <b-form-input
+                        id="input-3-1"
+                        v-model="form3.url"
+                        type="url"
+                        placeholder=""
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row
+                  class="justify-content-md-center"
+                  style="margin-bottom: 64px;"
                 >
-              </b-row>
+                  <b-col style="" class="labelData">Nama API</b-col>
+                  <b-col cols="10" class="">
+                    <b-form-group
+                      id="input-group-3-2"
+                      label=""
+                      label-for="input-3-2"
+                    >
+                      <b-form-input
+                        id="input-3-2"
+                        v-model="form3.namaAPI"
+                        type="text"
+                        placeholder=""
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row align-h="end">
+                  <b-col cols="2"
+                    ><b-button @click="steptwoform()" style="" class="nav_btn"
+                      >Sebelumnya</b-button
+                    ></b-col
+                  >
+                  <b-col cols="2"
+                    ><b-button
+                      @click="stepfourform()"
+                      style=""
+                      class="nav_btn"
+                      type="submit"
+                      >Selanjutnya</b-button
+                    ></b-col
+                  >
+                </b-row>
+              </b-form>
             </b-container>
             <b-container class="nav-btn"> </b-container>
           </div>
         </b-form>
       </div>
     </b-card>
+    <!--
     <b-card class="mt-3 " header="Form Data Result">
-      Nama Tabel : {{ namaTabel }} Jumlah Kolom : {{ jumlahKolom }}
-      <pre class="m-0">{{ Listkolom }}</pre>
+      Nama Tabel : {{ form1.namaTabel }}
+      <div></div>
+      Jumlah Kolom : {{ form1.jumlahKolom }}
+      <div></div>
+      <pre class="m-0">Kolom : {{ form2 }}</pre>
+      <pre class="m-0">Kolom : {{ form3 }}</pre>
     </b-card>
+    -->
     <finish />
   </div>
 </template>
@@ -417,16 +459,21 @@ export default {
 
   data() {
     return {
+      form1: {
+        namaTabel: "",
+        jumlahKolom: 1,
+      },
+      form2: [],
+      form3: {
+        url: "",
+        namaAPI: "",
+      },
+      sampleData: [],
+      jumlahKolom: 1,
       hover1: false,
       hover2: false,
       hover3: false,
       hover4: false,
-      Listkolom: [],
-      sampleData: [],
-      namaTabel: "",
-      namaAPI: "",
-      URL: "",
-      jumlahKolom: 1,
       show1: true,
       show2: false,
       show3: false,
@@ -462,11 +509,11 @@ export default {
       alert(JSON.stringify(this.form));
     },
     pushArr() {
-      if (this.jumlahKolom > 0) {
-        this.Listkolom = [];
+      if (this.form1.jumlahKolom > 0) {
+        this.form2 = [];
         this.sampleData = [];
-        for (var i = 1; i <= this.jumlahKolom; i++) {
-          this.Listkolom.push({
+        for (var i = 1; i <= this.form1.jumlahKolom; i++) {
+          this.form2.push({
             NamaKolom: "",
             TipeKolom: "",
             PanjangKolom: "",
@@ -491,37 +538,55 @@ export default {
       this.color4 = "#32b3c2";
     },
     steptwoform() {
-      this.show1 = false;
-      this.show2 = true;
-      this.show3 = false;
-      this.show4 = false;
-      this.color1 = "#32b3c2";
-      this.color2 = "rgba(42, 140, 151, 1)";
-      this.color3 = "#32b3c2";
-      this.color4 = "#32b3c2";
-      this.pushArr();
+      if (!this.form1.namaTabel == "") {
+        this.show1 = false;
+        this.show2 = true;
+        this.show3 = false;
+        this.show4 = false;
+        this.color1 = "#32b3c2";
+        this.color2 = "rgba(42, 140, 151, 1)";
+        this.color3 = "#32b3c2";
+        this.color4 = "#32b3c2";
+        this.pushArr();
+      }
+      else{
+        alert("Harap Isi Terlebih Dahulu Nama Tabel");
+      }
     },
     stepthreeform() {
-      this.show1 = false;
-      this.show2 = false;
-      this.show3 = true;
-      this.show4 = false;
-      this.color1 = "#32b3c2";
-      this.color2 = "#32b3c2";
-      this.color3 = "rgba(42, 140, 151, 1)";
-      this.color4 = "#32b3c2";
-      this.pushArr();
+      if (!this.form1.namaTabel == "") {
+        this.show1 = false;
+        this.show2 = false;
+        this.show3 = true;
+        this.show4 = false;
+        this.color1 = "#32b3c2";
+        this.color2 = "#32b3c2";
+        this.color3 = "rgba(42, 140, 151, 1)";
+        this.color4 = "#32b3c2";
+        this.pushArr();
+      }
+            else{
+        alert("Harap Isi Terlebih Dahulu Nama Tabel");
+      }
     },
     stepfourform() {
-      this.show1 = false;
-      this.show2 = false;
-      this.show3 = false;
-      this.show4 = true;
-      this.color1 = "#32b3c2";
-      this.color2 = "#32b3c2";
-      this.color3 = "#32b3c2";
-      this.color4 = "rgba(42, 140, 151, 1)";
-      this.pushArr();
+      if (!this.form1.namaTabel == "" && !this.form3.namaAPI == "") {
+        this.show1 = false;
+        this.show2 = false;
+        this.show3 = false;
+        this.show4 = true;
+        this.color1 = "#32b3c2";
+        this.color2 = "#32b3c2";
+        this.color3 = "#32b3c2";
+        this.color4 = "rgba(42, 140, 151, 1)";
+        this.pushArr();
+      }
+      else if(this.form1.namaTabel == "" ){
+        alert("Harap Isi Terlebih Dahulu Nama Tabel");
+      }
+      else if(this.form3.namaAPI == ""){
+        alert("Harap Isi Terlebih Dahulu Nama API");
+      }
     },
   },
 };
